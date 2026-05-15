@@ -1,0 +1,22 @@
+# Swift Package Manager / Xcode build artifacts
+ios-gdextension/.build/
+ios-gdextension/.build-xcode/
+ios-gdextension/.build-xcode-macos/
+ios-gdextension/Package.resolved
+
+# Android build artifacts
+android/.gradle/
+android/build/
+android/local.properties
+android/.idea/
+android/*.iml
+
+# macOS
+.DS_Store
+
+# Output binaries (synced to game/addons in monorepo)
+addons/*/bin/
+
+# Editor
+.vscode/
+.idea/
