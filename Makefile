@@ -55,6 +55,9 @@ ios: setup
 	fi
 
 # ── macOS (noop stub for editor) ─────────────────────
+# macOS bundle includes SwiftGodotRuntime.framework (per-plugin sibling)
+# so the editor can resolve dyld @rpath in dev mode. iOS sibling is provided
+# by canonical res://addons/SwiftGodotRuntime/ at export-time.
 macos: setup
 	cd $(IOS_GDEXT_DIR) && xcodebuild \
 		-scheme GodotHapticFeedback \
@@ -66,11 +69,13 @@ macos: setup
 	mkdir -p $(ADDON_DIR)/bin/macos
 	rm -rf $(ADDON_DIR)/bin/macos/*.framework
 	cp -R $(XCBUILD_PRODUCTS_MACOS)/GodotHapticFeedback.framework $(ADDON_DIR)/bin/macos/
+	cp -R $(XCBUILD_PRODUCTS_MACOS)/SwiftGodotRuntime.framework $(ADDON_DIR)/bin/macos/
 	@if [ -d "$(REPO_ROOT)/game/addons" ]; then \
 		echo "Refreshing game addon macos (BeatCells monorepo)"; \
 		mkdir -p $(GAME_ADDON_MACOS); \
-		rm -rf $(GAME_ADDON_MACOS)/GodotHapticFeedback.framework; \
+		rm -rf $(GAME_ADDON_MACOS)/GodotHapticFeedback.framework $(GAME_ADDON_MACOS)/SwiftGodotRuntime.framework; \
 		cp -R $(XCBUILD_PRODUCTS_MACOS)/GodotHapticFeedback.framework $(GAME_ADDON_MACOS)/; \
+		cp -R $(XCBUILD_PRODUCTS_MACOS)/SwiftGodotRuntime.framework $(GAME_ADDON_MACOS)/; \
 	fi
 
 # ── Android ──────────────────────────────────────────
