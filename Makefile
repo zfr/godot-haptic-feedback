@@ -52,6 +52,12 @@ ios: setup
 		rm -rf $(GAME_ADDON_IOS)/GodotHapticFeedback.framework $(GAME_ADDON_IOS)/GodotHapticFeedback.framework.dSYM; \
 		cp -R $(XCBUILD_PRODUCTS_IOS)/GodotHapticFeedback.framework $(GAME_ADDON_IOS)/; \
 		cp -R $(XCBUILD_PRODUCTS_IOS)/GodotHapticFeedback.framework.dSYM $(GAME_ADDON_IOS)/; \
+		echo "BeatCells fork: syncing addon .gd + plugin.cfg + .gdextension to game/addons (drift prevention)"; \
+		cp $(ADDON_DIR)/*.gd $(REPO_ROOT)/game/addons/godot-haptic-feedback/ 2>/dev/null || true; \
+		cp $(ADDON_DIR)/*.gd.uid $(REPO_ROOT)/game/addons/godot-haptic-feedback/ 2>/dev/null || true; \
+		cp $(ADDON_DIR)/plugin.cfg $(REPO_ROOT)/game/addons/godot-haptic-feedback/ 2>/dev/null || true; \
+		cp $(ADDON_DIR)/bin/*.gdextension $(REPO_ROOT)/game/addons/godot-haptic-feedback/bin/ 2>/dev/null || true; \
+		cp $(ADDON_DIR)/bin/*.gdextension.uid $(REPO_ROOT)/game/addons/godot-haptic-feedback/bin/ 2>/dev/null || true; \
 	fi
 
 # ── macOS (noop stub for editor) ─────────────────────
